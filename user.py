@@ -40,10 +40,10 @@ class User:
         res = self.open("https://office.chaoxing.com/data/apps/seat/reservelist?indexId=0&pageSize=10&type=-1")
         for item in res.json()['data']['reserveList']:
             if item['status'] == 1:
-                signback = self.open("https://office.chaoxing.com/data/apps/seat/signback", {'id': item['id']})
-                if not bool(signback.json()['success']):
-                    raise Exception('签退失败', signback.text)
-            print(signback.text)
+                signbackre = self.open("https://office.chaoxing.com/data/apps/seat/signback", {'id': item['id']})
+                if not bool(signbackre.json()['success']):
+                    raise Exception('签退失败', signbackre.text)
+                print(signbackre.text)
 
     def _cookie_cat(self, cookie):
         if self.cookie:
