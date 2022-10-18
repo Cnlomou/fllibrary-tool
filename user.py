@@ -60,6 +60,7 @@ password = os.getenv("passwd", "")
 if not phone or not password:
     raise Exception('未配置账号信息')
 # "559e6bd2ec45f150e70c4f76764f8770"
+print(phone, password)
 user = User(phone, password)
 user.login()
 user.signBack()
