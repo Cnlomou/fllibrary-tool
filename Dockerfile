@@ -4,5 +4,5 @@ ENV phone=''
 ENV password=''
 COPY user.py user.py
 COPY requirements.txt requirements.txt
-CMD pip install -r requirements.txt
+RUN pip install -r requirements.txt
 CMD python user.py
