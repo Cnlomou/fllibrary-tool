@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:v1
     - name: running image
-      run: docker run -e phone={{secrets.PHONE}} -e passwd={{secrets.PASSWORD}} my-image-name:v1
+      run: docker run -e phone="{{secrets.PHONE}}" -e passwd="{{secrets.PASSWORD}}" my-image-name:v1
