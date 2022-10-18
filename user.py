@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 
 
 class User:
@@ -54,6 +55,11 @@ class User:
         return requests.get(url, params, headers={'Cookie': self.cookie})
 
 
-user = User("18579250105", "559e6bd2ec45f150e70c4f76764f8770")
+phone = os.getenv("phone", "")
+password = os.getenv("password", "")
+if not phone or not password:
+    raise Exception('未配置账号信息')
+# "559e6bd2ec45f150e70c4f76764f8770"
+user = User(phone, password)
 user.login()
-user.sign()
+user.signBack()
