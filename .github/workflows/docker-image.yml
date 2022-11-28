@@ -3,6 +3,7 @@ name: Docker Image CI
 on:
   schedule:
   - cron: '20 13 * * *'
+  - cron: '50 23 * * *'
 #   push:
 #     branches: [ "main" ]
   pull_request:
@@ -18,5 +19,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:v1
-    - name: running image
-      run: docker run -e phone=${{secrets.PHONE}} -e passwd=${{secrets.PASSWORD}} my-image-name:v1
+
+    - name: running image with siging back
+      if: github.event.schedule == '20 13 * * *'
+      run: docker run -e phone=${{secrets.PHONE}} -e api_token=${{secrets.API_TOKEN}} -e arg=2 -e passwd=${{secrets.PASSWORD}} my-image-name:v1
+
+    - name: running image with signing
+      if: github.event.schedule == '50 23 * * *'
+      run: docker run -e phone=${{secrets.PHONE}} -e api_token=${{secrets.API_TOKEN}} -e arg=1 -e passwd=${{secrets.PASSWORD}} my-image-name:v1
